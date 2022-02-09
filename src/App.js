@@ -1,23 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import ButtonIncrement from './ButtonIncrement';
+import ButtonDecrement from './ButtonDecrement';
 
-function App() {
+// function App() {
+const App = () => {
+  // useState(bisaMasukApaAja)
+  const [number, setNumber] = useState(0)
+
+  // harus di declar type dari variablenya, misal const
+  const setVal = (val) => {
+    setNumber(val)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      {/* <button onClick={decrement}>+</button> */}
+      {/* {number} */}
+      {/* <button onClick={increment}>+</button> */}
+      <ButtonDecrement number={number} callback={setVal} />
+      <ButtonIncrement number={number} callback={setVal} />
     </div>
   );
 }
