@@ -3,84 +3,72 @@ import './App.css';
 import { useState } from 'react';
 import Todo from './todo/Todo';
 import ActionType from './context/actionType';
+import { useSelector } from 'react-redux';
+import DecrementButton from './component/DecrementButton';
+import IncrementButton from './component/IncrementButton';
+import { TodoList } from './todo2/TodoList';
+import { TodoForm } from './todo2/TodoForm';
 
-// function App() {
 const App = () => {
-  let todo = [
-    {
-      todo:'tes',
-      description:'description tes',
-      status: false,
-    },
-  ]
+  // let todo = [
+  //   {
+  //     todo:'tes',
+  //     description:'description tes',
+  //     status: false,
+  //   },
+  // ]
+  
+  // const [todos, setTodo] = useState(todo)
+  
+  // const addTodo = (newTodo) => {
+  //   setTodo([
+  //     ...todos, newTodo
+  //   ])
+  // }
 
-  // const [number, setNumber] = useState(0)
-
-  // // harus di declare type dari variablenya, misal const
-  // const increment = () => {
-  //   setNumber(
-  //     number+1
+  // const deleteTodo = (todo) => {
+  //   setTodo(
+  //     todos.filter(td => td.todo !== todo)
   //   )
   // }
-  // const decrement = () => {
-  //   if (number>0) {
-  //     setNumber(
-  //       number-1
-  //     )
-  //   }
+
+  // const updateTodo = (index, updatedTodo) => {
+  //   setTodo([...todos.slice(0, index), updatedTodo, ...todos.slice(index+1)])
   // }
 
-  // const [number, setNumber] = useState(0)
-
-  // harus di declare type dari variablenya, misal const
-  // const setVal = (val) => {
-  //   setNumber(val)
+  // const doneTodo = (index, todo) => {
+  //   todo.status = !todo.status
+  //   setTodo([...todos.slice(0,index), todo, ...todos.slice(index+1)])
   // }
   
-  const [todos, setTodo] = useState(todo)
-  
-  const addTodo = (newTodo) => {
-    setTodo([
-      ...todos, newTodo
-    ])
-  }
 
-  const deleteTodo = (todo) => {
-    setTodo(
-      todos.filter(td => td.todo !== todo)
-    )
-  }
-
-  const updateTodo = (index, updatedTodo) => {
-    // todos[index] = updatedTodo
-    // setTodo(todos)
-    setTodo([...todos.slice(0, index), updatedTodo, ...todos.slice(index+1)])
-  }
-
-  const doneTodo = (index, todo) => {
-    // todos[index].status = !todos[index].status
-    todo.status = !todo.status
-    setTodo([...todos.slice(0,index), todo, ...todos.slice(index+1)])
-  }
-  
+  const counter = useSelector((state) => state.nilai)
 
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header> */}
       {/* <button onClick={decrement}>+</button> */}
       {/* {number} */}
       {/* <button onClick={increment}>+</button> */}
       {/* <ButtonDecrement number={number} callback={setVal} /> */}
       {/* <ButtonIncrement number={number} callback={setVal} /> */}
-      <Todo
+      {/* <Todo
         todo = {todos}
         addTodo = {addTodo}
         deleteTodo = {deleteTodo}
         updateTodo = {updateTodo}
         doneTodo = {doneTodo}
-      />
+      /> */}
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+      </header>
+      {counter}
+      <br/>
+      <DecrementButton/>
+      <IncrementButton/>
+      <br/>
+      <TodoList/>
+      <br/>
+      <TodoForm/>
     </div>
   );
 }
