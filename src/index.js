@@ -8,9 +8,7 @@ import { store } from './redux/CounterStore'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
     <App />
-    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,13 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { createContext, useReducer, useState } from 'react';
 import Todo from './todo/Todo';
-import ActionType from './context/actionType';
-import { useSelector } from 'react-redux';
 import DecrementButton from './component/DecrementButton';
 import IncrementButton from './component/IncrementButton';
 import { TodoList } from './todo2/TodoList';
 import { TodoForm } from './todo2/TodoForm';
+import ActionType from './redux/ActionType';
+
+export const RootContext = createContext()
+
+// const initial = 5
+const initial = {
+  nilai : 5,
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case ActionType.PLUS:
+        return {
+            ...state,
+            nilai : state.nilai + 1
+        }
+    case ActionType.MINUS:
+        return {
+            ...state,
+            nilai : state.nilai - 1
+        }
+    default: return state
+}
+}
 
 const App = () => {
   // let todo = [
@@ -41,10 +63,21 @@ const App = () => {
   //   setTodo([...todos.slice(0,index), todo, ...todos.slice(index+1)])
   // }
   
+  const [nilai, dispatch] = useReducer(reducer, initial)
 
-  const counter = useSelector((state) => state.nilai)
+  const handleIncrement = (data) => {
+    dispatch(data)
+  }
 
   return (
+    <RootContext.Provider
+      value = {
+        {
+          nilaiz: nilai,
+          dispatch: handleIncrement,
+        }
+      }
+    >
     <div className="App">
       {/* <button onClick={decrement}>+</button> */}
       {/* {number} */}
@@ -61,15 +94,15 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      {counter}
       <br/>
       <DecrementButton/>
       <IncrementButton/>
-      <br/>
+      {/* <br/>
       <TodoList/>
       <br/>
-      <TodoForm/>
+      <TodoForm/> */}
     </div>
+    </RootContext.Provider>
   );
 }
 

@@ -1,16 +1,18 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useContext } from "react"
+import { RootContext } from "../App"
 import ActionType from "../redux/ActionType"
 
 const DecrementButton = () => {
 
-    const dispatch = useDispatch()
-    const counter = useSelector((state) => state.nilai)
+    const data = useContext(RootContext)
+
+    // console.log(data)
 
     return (
         <>
-            {counter}
+            {data.nilaiz.nilai}
             <button
-                onClick={() => dispatch (
+                onClick={() => data.dispatch (
                     {
                         type: ActionType.MINUS
                     }
