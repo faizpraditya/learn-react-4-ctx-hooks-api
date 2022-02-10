@@ -3,6 +3,7 @@ const ActionType = {
     DELETE_TODO : "DELETE_TODO",
     SET_FORM : "SET_FORM",
     DONE_TODO : "DONE_TODO",
+    UPDATE_TODO : "UPDATE_TODO",
 }
 
 export default ActionType

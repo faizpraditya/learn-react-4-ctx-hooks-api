@@ -16,7 +16,7 @@ const App = () => {
 
   // const [number, setNumber] = useState(0)
 
-  // // harus di declar type dari variablenya, misal const
+  // // harus di declare type dari variablenya, misal const
   // const increment = () => {
   //   setNumber(
   //     number+1
@@ -32,7 +32,7 @@ const App = () => {
 
   // const [number, setNumber] = useState(0)
 
-  // harus di declar type dari variablenya, misal const
+  // harus di declare type dari variablenya, misal const
   // const setVal = (val) => {
   //   setNumber(val)
   // }
@@ -52,14 +52,15 @@ const App = () => {
   }
 
   const updateTodo = (index, updatedTodo) => {
-    todos[index] = updatedTodo
-    setTodo(todos)
+    // todos[index] = updatedTodo
+    // setTodo(todos)
+    setTodo([...todos.slice(0, index), updatedTodo, ...todos.slice(index+1)])
   }
 
-  const doneTodo = (index) => {
-    console.log(todos[index]);
-    todos[index].status = !todos[index].status
-    setTodo(todos)
+  const doneTodo = (index, todo) => {
+    // todos[index].status = !todos[index].status
+    todo.status = !todo.status
+    setTodo([...todos.slice(0,index), todo, ...todos.slice(index+1)])
   }
   
 

@@ -11,11 +11,6 @@ const Todo = (props) => {
     }
 
     let [td, setTd] = useState(todoState)
-    // const todoListForm = {
-    //     addForm : false,
-    // }
-    
-    // const [listForm, setListForm] = useState(todoListForm)
     
     let addForm = false
     let [listForm, setListForm] = useState(addForm)
@@ -24,14 +19,6 @@ const Todo = (props) => {
     let [update, setUpdate] = useState(isUpdate)
 
     let [updateIndex, setUpdateIndex] = useState(0)
-
-    // const changeFormList = () => {
-    //     console.log(listForm)
-    //     setListForm(
-    //         listForm.addForm=!listForm.addForm
-    //     )
-    //     console.log(listForm)
-    // }
 
     const changeUpdateIndex = (index, todo) => {
         setUpdateIndex(index)
