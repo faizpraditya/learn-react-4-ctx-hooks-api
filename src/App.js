@@ -5,6 +5,7 @@ import { Product } from './pages/product/Product';
 import { Customer } from './pages/customer/Customer';
 import { ProductFrom } from './pages/product/ProductForm';
 import { NotFoundPage } from './pages/shared/PageNotFound';
+import { CustomerFrom } from './pages/customer/component/CustomerForm';
 
 const App = () => {
   return (
@@ -27,20 +28,16 @@ const App = () => {
         </ul>
       </nav>
 
+      {/* Configurasi */}
       <Routes>
         <Route path='/' element={<Home/>} />
-        {/* <Route path='/products' element={<Product/>} > */}
-        {/* Outlet baka nyari index sebagai parent (/) */}
-        {/* <Route path='/products' element={<Outlet/>} > */}
+        {/* placeholdeer untuk component childnya ke rerender */}
         <Route path='products' element={<Outlet/>} >
           <Route index element={<Product/>}/>
           <Route path='form' element={<ProductFrom/>} />
         </Route>
-        {/* <Route path='/customers' element={<Customer/>} > */}
-        <Route path='customers' element={<Customer/>} >
-          {/* <Route path='/customers/:name' element={<Customer/>} /> */}
-          <Route path=':name' element={<Customer/>} />
-        </Route>
+        {/* <Route path='customers' element={<Outlet/>} ></Route> */}
+        <Route path='customers/*' element={<Customer/>} />
         <Route path='*' element={<NotFoundPage/>} />
       </Routes>
     </Router>
