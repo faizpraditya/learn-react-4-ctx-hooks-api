@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Link, Outlet, Route, Routes, useNavigate} from
 import { Home } from './pages/home/Home';
 import { Product } from './pages/product/Product';
 import { Customer } from './pages/customer/Customer';
-import { ProductFrom } from './pages/product/ProductForm';
+import { ProductFrom } from './pages/product/component/ProductForm';
 import { NotFoundPage } from './pages/shared/PageNotFound';
 import { CustomerFrom } from './pages/customer/component/CustomerForm';
+import { ProductList } from './pages/product/component/ProductList';
 
 const App = () => {
   return (
@@ -33,8 +34,10 @@ const App = () => {
         <Route path='/' element={<Home/>} />
         {/* placeholdeer untuk component childnya ke rerender */}
         <Route path='products' element={<Outlet/>} >
-          <Route index element={<Product/>}/>
+          {/* <Route index element={<Product/>}/> */}
+          <Route index element={<ProductList/>}/>
           <Route path='form' element={<ProductFrom/>} />
+          <Route path='form/:id' element={<ProductFrom/>} />
         </Route>
         {/* <Route path='customers' element={<Outlet/>} ></Route> */}
         <Route path='customers/*' element={<Customer/>} />
