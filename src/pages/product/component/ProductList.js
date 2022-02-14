@@ -1,6 +1,6 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
+import { deleteProduct, getProducts } from "../service/ProductService"
 import { ProductFrom } from "./ProductForm"
 
 
@@ -9,14 +9,15 @@ export const ProductList = () => {
   let navigate = useNavigate()
 
   useEffect(() => {
-      getProducts()
+      getProductsList()
   }, []) // supaya menghentikan rerender yang berulang2
 
-  // pakai async await agar getProducts nunggu axios.get dapet data
-  const getProducts = async () => {
+  // pakai async await agar getProductsList nunggu axios.get dapet data
+  const getProductsList = async () => {
       try {
-          const response = await axios.get("http://localhost:3000/products")
-          console.log(response);
+        //   const response = await axios.get("http://localhost:3000/products")
+        const response = await getProducts()
+        //   console.log(response);
         //   console.log(response.data.products);
           setList(response.data.products)
       } catch (error) {
@@ -27,8 +28,9 @@ export const ProductList = () => {
   const handleDelete = async (data) => {
       try {
           if(window.confirm(`Are you sure to delete ${data.name}?`)) {
-              await axios.delete(`http://localhost:3000/products/${data.id}`)
-              await getProducts()
+            //   await axios.delete(`http://localhost:3000/products/${data.id}`)
+            await deleteProduct(data.id)
+            await getProductsList()
           }
       } catch (error) {
           console.log("error ", error);
