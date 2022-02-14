@@ -1,47 +1,28 @@
-import { useEffect, useState } from "react"
-import { Outlet, useNavigate } from "react-router-dom"
-import { deleteProduct, getProducts } from "../service/ProductService"
-import { ProductFrom } from "./ProductForm"
+import { useEffect } from "react"
 
-
-export const ProductList = () => {
-  const [list, setList] = useState([])
-  let navigate = useNavigate()
-
+export const ProductList = ({bloc}) => {
+  const {list, getProductsList, handleDelete, add, update} = bloc()
   useEffect(() => {
       getProductsList()
-  }, []) // supaya menghentikan rerender yang berulang2
+  }, []) 
 
-  // pakai async await agar getProductsList nunggu axios.get dapet data
-  const getProductsList = async () => {
-      try {
-        //   const response = await axios.get("http://localhost:3000/products")
-        const response = await getProducts()
-        //   console.log(response);
-        //   console.log(response.data.products);
-          setList(response.data.products)
-      } catch (error) {
-          console.log(error);
-      }
-  }
-
-  const handleDelete = async (data) => {
-      try {
-          if(window.confirm(`Are you sure to delete ${data.name}?`)) {
-            //   await axios.delete(`http://localhost:3000/products/${data.id}`)
-            await deleteProduct(data.id)
-            await getProductsList()
-          }
-      } catch (error) {
-          console.log("error ", error);
-      }
+  const handleDel = (data) => {
+    // window confirm harusnya di UI
+    if(window.confirm(`Are you sure to delete ${data.name}?`)) {
+        handleDelete(data)
+    }
   }
 
   return(
       <>
       <div>
           <h2>Product List</h2>
-          <button type="button" className="btn btn-success" onClick={() => navigate("form")}> Add Product </button>
+          <button
+          type="button"
+          className="btn btn-success" 
+        //   onClick={() => navigate("form")}
+          onClick={() => add()}
+          > Add Product </button>
           <table className="table table-striped">
               <thead>
                   <tr>
@@ -69,13 +50,14 @@ export const ProductList = () => {
 
                               <button
                               className="btn btn-success"
-                              onClick={() => navigate(`form/${product.id}`)}
+                            //   onClick={() => navigate(`form/${product.id}`)}
+                            onClick={() => update(product.id)}
                               >
                                   Update
                               </button>
                               <button
                               className="btn btn-danger"
-                              onClick={() => handleDelete(product)}
+                              onClick={() => handleDel(product)}
                               >
                                   Delete
                               </button>

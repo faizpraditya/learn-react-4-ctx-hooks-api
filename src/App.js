@@ -1,17 +1,16 @@
 import './App.css';
-import { BrowserRouter as Router, Link, Outlet, Route, Routes, useNavigate} from 'react-router-dom'
-import { Home } from './pages/home/Home';
-import { Product } from './pages/product/Product';
-import { Customer } from './pages/customer/Customer';
-import { ProductFrom } from './pages/product/component/ProductForm';
-import { NotFoundPage } from './pages/shared/PageNotFound';
-import { CustomerFrom } from './pages/customer/component/CustomerForm';
-import { ProductList } from './pages/product/component/ProductList';
+import { BrowserRouter as Router} from 'react-router-dom'
+import AppRouters from './routes/AppRouters';
+import Sidebar from './layout/Sidebar';
+import Header from './layout/Header';
+import ColumnLayout from './layout/ColumnLayout';
 
 const App = () => {
   return (
     <Router>
-      <nav>
+      <ColumnLayout/>
+      {/* <Header/> */}
+      {/* <nav>
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -27,22 +26,11 @@ const App = () => {
             <Link to="/customers">Customer</Link>
           </li>
         </ul>
-      </nav>
+      </nav> */}
+      {/* <Sidebar/> */}
 
       {/* Configurasi */}
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        {/* placeholdeer untuk component childnya ke rerender */}
-        <Route path='products' element={<Outlet/>} >
-          {/* <Route index element={<Product/>}/> */}
-          <Route index element={<ProductList/>}/>
-          <Route path='form' element={<ProductFrom/>} />
-          <Route path='form/:id' element={<ProductFrom/>} />
-        </Route>
-        {/* <Route path='customers' element={<Outlet/>} ></Route> */}
-        <Route path='customers/*' element={<Customer/>} />
-        <Route path='*' element={<NotFoundPage/>} />
-      </Routes>
+      {/* <AppRouters/> */}
     </Router>
   );
 }

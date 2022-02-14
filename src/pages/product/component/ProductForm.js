@@ -1,33 +1,21 @@
-import { useEffect, useState } from "react"
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useEffect } from "react"
 import { CircularProgress } from "@mui/material"
-import { createProduct, getProduct, updateProduct } from "../service/ProductService"
 import { useFormik } from 'formik'
 
 import * as Yup from 'yup'
 
-export const ProductFrom = () => {
-  let params = useParams()
-  const [newData, setNewData] = useState({})
-  const navigate = useNavigate()
-  const readable = params.id ? true : false
-  const [loading, setLoading] = useState(false)
-  
-  // const [productF, setProductF] = useState({
-  //   isUpdate:false
-  // })
+export const ProductFrom = ({bloc}) => {
+  const {
+    params,
+    readable,
+    getProductId,
+    handleSubmit,
+    handleUpdate,
+    handleCancel,
+    loading,
+  } = bloc();
 
   useEffect(() => {
-    // if (typeof(params.id) != "undefined") {
-    //   setProductF({
-    //     isUpdate:true
-    //   })
-    // } else {
-    //   setProductF({
-    //     isUpdate:false
-    //   })
-    // }
-    // console.log(readable);
     if(params.id){
       getDataById()
     }
@@ -44,73 +32,24 @@ export const ProductFrom = () => {
     }),
     onSubmit: () => {
       if(params.id){
-        handleUpdate();
+        handleUpdate(formik.values);
       }else{
-        handleAdd()
+        handleSubmit(formik.values)
       }
     }
   })
 
   const getDataById = async () => {
-    // const res = await axios.get(`http://localhost:3000/products/${params.id}`)
-    const res = await getProduct(params.id)
+    const res = await getProductId()
     console.log("res data",res.data);
-    setNewData(res.data)
-    formik.values.id=res.data.id
-    formik.values.name=res.data.name
-    formik.setFieldValue(res)
+    formik.values.id = res.data.id
+    formik.values.name = res.data.name
+    formik.setFieldValue()
   }
-
-  const handleOnChange = (event) => {
-    if(event.target.name === 'id'){
-        setNewData({
-            ...newData,
-            id:event.target.value
-        })
-    } else if(event.target.name === 'name'){
-        setNewData({
-            ...newData,
-            name:event.target.value
-        })
-    }
-  }
-
-  // const handleUpdate = async (data) => {
-  const handleUpdate = async () => {
-      try {
-        setLoading(true)
-        // const res = await axios.put(`http://localhost:3000/products`,data)
-        // const res = await updateProduct(data)
-        const res = await updateProduct(formik.values)
-        console.log("res data", res.data);
-        setLoading(false)
-        navigate("..")
-      } catch (error) {
-          console.log("error ", error);
-      }
-  }
-
-  // const handleAdd = async (data) => {
-  const handleAdd = async () => {
-      try {
-        setLoading(true)
-        // const res = await axios.post(`http://localhost:3000/products`,data)
-        // const res = await createProduct(data)
-        const res = await createProduct(formik.values)
-        console.log("res data", res.data);
-        setLoading(false)
-        navigate("..")
-      } catch (error) {
-          console.log("error ", error);
-      }
-  }
-
-  // bikin button untuk put dan post untuk ngehit api
 
   return(
-    <div className="d-flex justify-content-center">
+    <div className="">
     {
-        // productF.isUpdate ? 
         readable ? 
         loading ? 
         <>
@@ -163,6 +102,7 @@ export const ProductFrom = () => {
         </div>
         <br></br>
         {/* <input className="btn btn-primary" type="submit" value="Submit" onClick={() => handleUpdate(newData)}/>  */}
+        <button className="btn btn-secondary" onClick={handleCancel}>Cancel</button>
         <input className="btn btn-primary" type="submit" value="Submit"/> 
         </form>
         </div>
@@ -217,6 +157,7 @@ export const ProductFrom = () => {
         </div>
         <br></br>
         {/* <input className="btn btn-primary" type="submit" value="Submit" onClick={() => handleAdd(newData)}/>  */}
+        <button className="btn btn-secondary" onClick={handleCancel}>Cancel</button>
         <input className="btn btn-primary" type="submit" value="Submit"/> 
         </form>
         </div>
