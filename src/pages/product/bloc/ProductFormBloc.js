@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createProduct, getProduct, updateProduct } from "../service/ProductService";
 
 
-const ProductFormBloc = () => {
+const ProductFormBloc = (productService) => {
+    let {
+        getProduct,
+        createProduct,
+        updateProduct,
+    } = productService()
+    
     let params = useParams()
     const readable = params.id ? true : false
     const navigate = useNavigate()

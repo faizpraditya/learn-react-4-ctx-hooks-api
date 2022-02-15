@@ -1,5 +1,4 @@
 import { useEffect } from "react"
-import { CircularProgress } from "@mui/material"
 import { useFormik } from 'formik'
 
 import * as Yup from 'yup'
@@ -53,7 +52,6 @@ export const ProductFrom = ({bloc}) => {
         readable ? 
         loading ? 
         <>
-        <CircularProgress />
         <h1>Loading...</h1>
         </>
         :
@@ -109,7 +107,6 @@ export const ProductFrom = ({bloc}) => {
         :
         loading ?
         <>
-        <CircularProgress />
         <h1>Loading...</h1>
         </>
         :

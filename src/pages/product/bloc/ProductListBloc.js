@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteProduct, getProducts } from "../service/ProductService";
 
-const ProductListBloc = () => {
+const ProductListBloc = (productService) => {
+    let {
+        getProducts,
+        deleteProduct,
+    } = productService()
+    
     const [list, setList] = useState([])
     const navigate = useNavigate()
 

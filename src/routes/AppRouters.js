@@ -5,6 +5,7 @@ import ProductFormBloc from "../pages/product/bloc/ProductFormBloc"
 import ProductListBloc from "../pages/product/bloc/ProductListBloc"
 import { ProductFrom } from "../pages/product/component/ProductForm"
 import { ProductList } from "../pages/product/component/ProductList"
+import ProductService from "../pages/product/service/ProductService"
 import { NotFoundPage } from "../pages/shared/PageNotFound"
 
 const AppRouters = () => {
@@ -16,15 +17,15 @@ const AppRouters = () => {
         {/* <Route index element={<Product/>}/> */}
         <Route 
         index 
-        element={<ProductList bloc={() => ProductListBloc()}/>}
+        element={<ProductList bloc={() => ProductListBloc(ProductService)}/>}
         />
         <Route 
         path='form' 
-        element={<ProductFrom bloc={() => ProductFormBloc()}/>}
+        element={<ProductFrom bloc={() => ProductFormBloc(ProductService)}/>}
         />
         <Route 
         path='form/:id' 
-        element={<ProductFrom bloc={() => ProductFormBloc()}/>} 
+        element={<ProductFrom bloc={() => ProductFormBloc(ProductService)}/>} 
         />
       </Route>
       {/* <Route path='customers' element={<Outlet/>} ></Route> */}
