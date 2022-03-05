@@ -1,14 +1,13 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-const ProductListBloc = (productService) => {
+const ProductListBloc = (productService, useProductList, navigation) => {
     let {
         getProducts,
         deleteProduct,
     } = productService()
-    
-    const [list, setList] = useState([])
-    const navigate = useNavigate()
+
+    let {list, setList} = useProductList()
+
+    // const navigate = useNavigate()
+    const {navigateTo} = navigation()
 
     // contoh: getListProduct
     const getProductsList = async () => {
@@ -35,9 +34,9 @@ const ProductListBloc = (productService) => {
     }
 
     // const add = () => navigate("form")
-    const add = () => {navigate("form")}
+    const add = () => {navigateTo("form")}
     // const update = (id) => navigate(`form/${id}`)
-    const update = (id) => {navigate(`form/${id}`)}
+    const update = (id) => {navigateTo(`form/${id}`)}
 
     return {
         list,

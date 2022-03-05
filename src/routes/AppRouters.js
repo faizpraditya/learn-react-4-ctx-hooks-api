@@ -3,10 +3,12 @@ import { Customer } from "../pages/customer/Customer"
 import { Home } from "../pages/home/Home"
 import ProductFormBloc from "../pages/product/bloc/ProductFormBloc"
 import ProductListBloc from "../pages/product/bloc/ProductListBloc"
+import UseProductList from "../pages/product/bloc/UseProductList"
 import { ProductFrom } from "../pages/product/component/ProductForm"
 import { ProductList } from "../pages/product/component/ProductList"
 import ProductService from "../pages/product/service/ProductService"
 import { NotFoundPage } from "../pages/shared/PageNotFound"
+import { RouteNavigation } from "./RouteNavigation"
 
 const AppRouters = () => {
     return(
@@ -17,7 +19,7 @@ const AppRouters = () => {
         {/* <Route index element={<Product/>}/> */}
         <Route 
         index 
-        element={<ProductList bloc={() => ProductListBloc(ProductService)}/>}
+        element={<ProductList bloc={() => ProductListBloc(ProductService, UseProductList, RouteNavigation)}/>}
         />
         <Route 
         path='form' 
